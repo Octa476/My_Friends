@@ -1,3 +1,7 @@
 # Ignore:
 
 venv/
+
+*.pyc
+
+friends.db
