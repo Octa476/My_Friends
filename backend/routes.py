@@ -73,3 +73,32 @@ def delete_friend(id):
         # and return an error message.
         db.session.rollback()
         return jsonify({"error":str(e)}), 500
+    
+# Update a data field.
+@app.route("/api/friends/<int:id>",methods=["PATCH"])
+def update_friend(id):
+    try:
+        # Search for the data with the given id.
+        friend = Friend.query.get(id)
+        # Return error message if the data doesn't exist.
+        if friend is None:
+            return jsonify({"error":"Friend not found"}), 404
+        
+        # Get the data from the client(json format) received via POST method.
+        data = request.json
+
+        # Change the fields of the data with the given id.
+        friend.name = data.get("name", friend.name)
+        friend.role = data.get("role", friend.role)
+        friend.description = data.get("description", friend.description)
+        friend.gender = data.get("gender", friend.gender)
+
+        # Save the changes of the database.
+        db.session.commit()
+        # Return the updated data.
+        return jsonify(friend.to_json()), 200
+    except Exception as e:
+        # If something unexpected happened keep the current database state
+        # and return an error message.
+        db.session.rollback()
+        return jsonify({"error":str(e)}), 500
