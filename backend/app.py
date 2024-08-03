@@ -1,7 +1,7 @@
 # This file is used to start the backend aplication.
 
 from flask import Flask
-from flask_sqlalchemy import SQLAlchemt
+from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
 
 # Start de app object.
@@ -18,7 +18,13 @@ app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 # Start teh data base for the app.
 db = SQLAlchemy(app)
 
-# The backend starts just if you run this scipt(app.py).
+# Import the operations needed for 
+# communicating with the client.
+import routes
+with app.app_context():
+    db.create_all()
+
+# The backend starts just if you run this script(app.py).
 # The backend doesn't run if it is imported in other script.
 if __name__ == "__main__":
     app.run(debug=True)
