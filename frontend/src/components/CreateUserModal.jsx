@@ -19,7 +19,7 @@ import {
 } from '@chakra-ui/react';
 import {BiAddToQueue} from "react-icons/bi";
 import { useState } from 'react';
-export const BASE_URL = "http://127.0.0.1:5000/api";
+import { BASE_URL } from '../App';
 
 const CreateUserModal = ({ setUsers }) => {
     const { isOpen, onOpen, onClose } = useDisclosure();
@@ -59,22 +59,22 @@ const CreateUserModal = ({ setUsers }) => {
 
             onClose();
             setUsers((prevUsers) => [...prevUsers, data]);
-        } catch (error) {
-            toast({
-                status: "error",
-                title: "ESTI PROST",
-                description: "Ai pierdut japita!",
-                duration: 2000,
-                position: "top-center",
-            });
-        } finally {
-            setIsLoading(false);
             setInputs({
                 name: "",
                 role: "",
                 description: "",
                 gender: "",
             })
+        } catch (error) {
+            toast({
+                status: "error",
+                title: "ESTI PROST",
+                description: error.message,
+                duration: 2000,
+                position: "top-center",
+            });
+        } finally {
+            setIsLoading(false);
         }
 
     };

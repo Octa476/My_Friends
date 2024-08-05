@@ -1,12 +1,12 @@
 import { Avatar, Box, Card,CardBody, CardHeader, Flex,Heading, IconButton,Text,useToast} from '@chakra-ui/react';
 import {BiTrash} from 'react-icons/bi';
 import EditModal from './EditModal';
-//import {BASE_URL} from '../App';
+import { BASE_URL } from '../App';
 const UserCard = ({user,setUsers}) => {
     const toast = useToast();
     const handleDeleteUser = async () => {
-        try {console.log("cftyewgd");
-            const res = await fetch("http://127.0.0.1:5000/api" + "/friends/" + user.id,{
+        try {
+            const res = await fetch(BASE_URL + "/friends/" + user.id,{
                 method: "DELETE",
                 
 
@@ -44,7 +44,8 @@ const UserCard = ({user,setUsers}) => {
                     </Box>
                 </Flex>
                 <Flex>
-                    <EditModal user={user}/>
+                    <EditModal user={user} setUsers={setUsers}
+                    />
                     <IconButton
                         variant='ghost'
                         colorScheme='red'

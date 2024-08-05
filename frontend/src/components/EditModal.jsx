@@ -14,10 +14,11 @@ import {
     ModalOverlay,
     Textarea,
     useDisclosure,
+    useToast,
 } from "@chakra-ui/react";
 import {useState} from 'react';
 import { BiEditAlt } from "react-icons/bi";
-
+import { BASE_URL } from '../App';
 function EditModal({setUsers, user }) {
     const { isOpen, onOpen, onClose } = useDisclosure();
     const [isLoading,setIsLoading]=useState(false);
@@ -25,8 +26,44 @@ function EditModal({setUsers, user }) {
         name: user.name,
         role: user.role,
         description: user.description,
-
     })
+    const toast = useToast();
+    const handleEditUser = async (e) => {
+        e.preventDefault();
+        setIsLoading(true);
+        try {
+            const res = await fetch(BASE_URL + "/friends/" + user.id, {
+                method: "PATCH",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(inputs)
+            })
+            const data = await res.json();
+            if (!res.ok) {
+                throw new Error(data.error)
+            }
+            setUsers((prevUsers) => prevUsers.map((u) => u.id === user.id ? data: u ));
+            toast({
+                status: "success",
+                title: "ESTI BAROSAN",
+                description: "Ai prins japita!",
+                duration: 2000,
+                position: "top-center",
+            });
+            onClose();
+        } catch (error) {
+            toast({
+                status: "error",
+                title: "ESTI NASPA",
+                description: "Ai pierdut japita!",
+                duration: 2000,
+                position: "top-center",
+            });
+        } finally {
+            isLoading(false);
+        }
+    }
     return (
         <>
             <IconButton
@@ -48,12 +85,18 @@ function EditModal({setUsers, user }) {
                         <Flex alignItems={"center"} gap={4}>
                             <FormControl>
                                 <FormLabel>Full Name</FormLabel>
-                                <Input placeholder='John Doe' />
+                                <Input placeholder='John Doe' 
+                                    value = {inputs.name}
+                                    onChange={(e) => setInputs((prev) => ({...prev, name: e.target.value}))}
+                                />
                             </FormControl>
 
                             <FormControl>
                                 <FormLabel>Role</FormLabel>
-                                <Input placeholder='Software Engineer' />
+                                <Input placeholder='Software Engineer' 
+                                value = {inputs.role}
+                                onChange={(e) => setInputs((prev) => ({...prev, role: e.target.value}))}
+                                />
                             </FormControl>
                         </Flex>
                         <FormControl mt={4}>
@@ -62,6 +105,8 @@ function EditModal({setUsers, user }) {
                                 resize={"none"}
                                 overflowY={"hidden"}
                                 placeholder="He's a software engineer who loves to code and build things."
+                                value = {inputs.description}
+                                onChange={(e) => setInputs((prev) => ({...prev, description: e.target.value}))}
                             />
                         </FormControl>
                         
