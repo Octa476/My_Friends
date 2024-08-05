@@ -10,7 +10,7 @@ function App() {
       <Container maxW={"1200px"} my={4}>
         <Text
         fontSize={{base: "3xl" ,md: "50"}}
-        fontweight={"bold"}
+        fontWeight={"bold"}
         letterSpacing={"2px"}
         textTransform={"uppercase"}
         textAlign={"center"}

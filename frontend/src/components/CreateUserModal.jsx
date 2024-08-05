@@ -27,7 +27,7 @@ const CreateUserModal = ({ setUsers }) => {
     const [ inputs, setInputs ] = useState(({
         name: "",
         role: "",
-        decription: "",
+        description: "",
         gender: "",
     }));
     const toast = useToast();
@@ -48,7 +48,7 @@ const CreateUserModal = ({ setUsers }) => {
             if (!res.ok) {
                 throw new Error(data.error)
             }
-
+            console.log(inputs);
             toast({
                 status: "success",
                 title: "ESTI BAROSAN",
@@ -72,7 +72,7 @@ const CreateUserModal = ({ setUsers }) => {
             setInputs({
                 name: "",
                 role: "",
-                decription: "",
+                description: "",
                 gender: "",
             })
         }
@@ -125,7 +125,7 @@ const CreateUserModal = ({ setUsers }) => {
                                 />
                             </FormControl>
                             <FormControl mt={4}>
-                            <RadioGroup defaultValue='male' mt={4}>
+                            <RadioGroup mt={4}>
                                 <Flex gap={5}>
                                     <Radio value='male'
                                         onChange={(e) => setInputs({...inputs, gender: e.target.value})} 

@@ -15,11 +15,18 @@ import {
     Textarea,
     useDisclosure,
 } from "@chakra-ui/react";
+import {useState} from 'react';
 import { BiEditAlt } from "react-icons/bi";
 
-function EditModal({ user }) {
+function EditModal({setUsers, user }) {
     const { isOpen, onOpen, onClose } = useDisclosure();
+    const [isLoading,setIsLoading]=useState(false);
+    const [inputs,setInputs] = useState({
+        name: user.name,
+        role: user.role,
+        description: user.description,
 
+    })
     return (
         <>
             <IconButton
@@ -33,6 +40,7 @@ function EditModal({ user }) {
 
             <Modal isOpen={isOpen} onClose={onClose}>
                 <ModalOverlay />
+                <form onSubmit={handleEditUser}>
                 <ModalContent>
                     <ModalHeader>My new BFF 😍</ModalHeader>
                     <ModalCloseButton />
@@ -60,12 +68,16 @@ function EditModal({ user }) {
                     </ModalBody>
 
                     <ModalFooter>
-                        <Button colorScheme='blue' mr={3}>
+                        <Button colorScheme='blue' mr={3}
+                        type ='submit'
+                        isloading={isLoading}>
+
                             Update
                         </Button>
                         <Button onClick={onClose}>Cancel</Button>
                     </ModalFooter>
                 </ModalContent>
+                </form>
             </Modal>
         </>
     );
