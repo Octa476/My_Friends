@@ -19,7 +19,7 @@ app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 # Start teh data base for the app.
 db = SQLAlchemy(app)
 
-dist_folder = os.path.join(os.getcwd(), "..", "frontend", "dist")
+# dist_folder = os.path.join(os.getcwd(), "..", "frontend", "dist")
 
 # # Server static files from the "dist" folder under the "frontend" directory.
 # # Sends the frontend app to the browser in order to be displayed.
