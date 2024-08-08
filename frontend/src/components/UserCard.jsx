@@ -16,15 +16,20 @@ const UserCard = ({user,setUsers}) => {
             throw new Error(data.error);
         }
         setUsers((prevUsers) => prevUsers.filter((u) => u.id !== user.id));
+        let mesaj;
+            if(user.gender==='male')
+                mesaj = `Prietenul ${user.name} a fost șters cu succes!`;
+                else
+                mesaj = `Prietena ${user.name} a fost ștearsă cu succes!`;
         toast({
-            title: "User deleted successfully",
+            title: mesaj,
             status: "success",
             duration: 2000,
             isClosable: true,
         });
         } catch (error){
             toast({
-                title: "an error ocurred",
+                title: "A apărut o eroare",
                 description: error.message,
                 duration: 2000,
                 isClosable: true,

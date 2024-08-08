@@ -18,7 +18,7 @@ function App() {
         mb={8}
         >
           <Text as={"span"} bgGradient={"linear(to-r, cyan.400,blue.500)"} bgClip={"text"}>
-            My Besties</Text>
+            Prietenii mei</Text>
         </Text>
         <UserGrid  users={users} setUsers = { setUsers }/>
       </Container>

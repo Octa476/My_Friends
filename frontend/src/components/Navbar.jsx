@@ -15,16 +15,16 @@ const Navbar = ({setUsers}) => {
             gap={3}
             display={{base:"none", sm:"flex"}} 
             >
-                <img src="/reactlogo.png" alt="reactlogo" width={50} height={50}/>
+                <img src="/react.png" alt="reactlogo" width={50} height={50}/>
                 <Text fontSize={"40px"}>+</Text>
-                <img src="/piton.jfif" alt="python" width={50} height={40}/>
+                <img src="/python.png" alt="python" width={50} height={40}/>
                 <Text fontSize={"40px"}>=</Text>
-                <img src="/explosion.png" alt="the brainrot has got me pls help" width={45} height={45}/>
+                <img src="/explode.png" alt="the brainrot has got me pls help" width={45} height={45}/>
             </Flex>
             {/* Right side */}
             <Flex gap={3} alignItems={"center"}>
                 <Text fontSize={"lg"} fontWeight={500} display={{ base: "none", md: "block"}}>
-                    brainrot
+                    Tovarășii mei ദ്ദി(˵ •̀ ᴗ - ˵ ) ✧
                 </Text>
                 <Button onClick={toggleColorMode}>
                     {colorMode === "light" ? <IoMoon /> : <LuSun size={20} />}

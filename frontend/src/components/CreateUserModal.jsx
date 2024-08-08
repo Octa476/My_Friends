@@ -48,11 +48,15 @@ const CreateUserModal = ({ setUsers }) => {
             if (!res.ok) {
                 throw new Error(data.error)
             }
-            console.log(inputs);
+            let mesaj;
+            if(data.gender==='male')
+                mesaj = `Prietenul ${data.name} a fost creat cu succes!`;
+                else
+                mesaj = `Prietena ${data.name} a fost creată cu succes!`;
             toast({
                 status: "success",
-                title: "ESTI BAROSAN",
-                description: "Ai prins japita!",
+                title: "Felicitări!",
+                description: mesaj,
                 duration: 2000,
                 position: "top-center",
             });
@@ -68,7 +72,7 @@ const CreateUserModal = ({ setUsers }) => {
         } catch (error) {
             toast({
                 status: "error",
-                title: "ESTI PROST",
+                title: "Ceva nu a funcționat!",
                 description: error.message,
                 duration: 2000,
                 position: "top-center",
@@ -92,34 +96,34 @@ const CreateUserModal = ({ setUsers }) => {
         <form onSubmit={handleCreateUser}>
             <ModalContent>
                 <ModalHeader>
-                    My new BFF ≽^•⩊•^≼
+                    Noul meu BFF ≽^•⩊•^≼
                 </ModalHeader>
                 <ModalCloseButton />
                     <ModalBody pb={6}>
                         
                             {/*Left*/}
                             <FormControl>
-                                <FormLabel>Full name</FormLabel>
-                                <Input placeholder="John PlsNo"
+                                <FormLabel>Nume complet</FormLabel>
+                                <Input placeholder="Ion Popescu"
                                     value = {inputs.name}
                                     onChange={(e) => setInputs({...inputs, name: e.target.value})} 
                                 />
                             </FormControl>
                             {/*Right*/}
                             <FormControl>
-                                <FormLabel>Role</FormLabel>
-                                <Input placeholder="Solftware engineer 😵" 
+                                <FormLabel>Rol</FormLabel>
+                                <Input placeholder="Inginer 😵" 
                                 value = {inputs.role}
                                 onChange={(e) => setInputs({...inputs, role: e.target.value})} 
                                 />
                             </FormControl>
             
                             <FormControl mt={4}>
-                                <FormLabel>Description</FormLabel>
+                                <FormLabel>Descriere</FormLabel>
                                 <Textarea
                                 resize={"none"}
                                 overflowY={"hidden"}
-                                placeholder="I'm tired of this 💩 gradma"
+                                placeholder="Face chestii să funcționeze"
                                 value = {inputs.description}
                                 onChange={(e) => setInputs({...inputs, description: e.target.value})} 
                                 />
@@ -129,10 +133,10 @@ const CreateUserModal = ({ setUsers }) => {
                                 <Flex gap={5}>
                                     <Radio value='male'
                                         onChange={(e) => setInputs({...inputs, gender: e.target.value})} 
-                                    >Male</Radio>
+                                    >Bărbat</Radio>
                                     <Radio value='female'
                                         onChange={(e) => setInputs({...inputs, gender: e.target.value})}
-                                    >Female</Radio>
+                                    >Femeie</Radio>
                                 </Flex>
                             </RadioGroup>
                             </FormControl>

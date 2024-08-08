@@ -44,19 +44,29 @@ function EditModal({setUsers, user }) {
                 throw new Error(data.error)
             }
             setUsers((prevUsers) => prevUsers.map((u) => u.id === user.id ? data: u ));
+           let mesaj;
+            if(user.gender==='male')
+                mesaj = `Prietenul ${user.name} a fost actualizat cu succes!`;
+                else
+                mesaj = `Prietena ${user.name} a fost actualizată cu succes!`;
             toast({
                 status: "success",
-                title: "ESTI BAROSAN",
-                description: "Ai prins japita!",
+                title: "Felicitări!",
+                description: mesaj,
                 duration: 2000,
                 position: "top-center",
             });
             onClose();
         } catch (error) {
+            let mesaj;
+            if(user.gender==='male')
+                mesaj = `Prietenul ${user.name} nu a fost actualizat!`;
+                else
+                mesaj = `Prietena ${user.name} nu a fost actualizată!`;
             toast({
                 status: "error",
-                title: "ESTI NASPA",
-                description: "Ai pierdut japita!",
+                title: "Eroare!",
+                description: mesaj,
                 duration: 2000,
                 position: "top-center",
             });
@@ -79,12 +89,12 @@ function EditModal({setUsers, user }) {
                 <ModalOverlay />
                 <form onSubmit={handleEditUser}>
                 <ModalContent>
-                    <ModalHeader>My new BFF 😍</ModalHeader>
+                    <ModalHeader>Actualizare prieten 😍</ModalHeader>
                     <ModalCloseButton />
                     <ModalBody pb={6}>
                         <Flex alignItems={"center"} gap={4}>
                             <FormControl>
-                                <FormLabel>Full Name</FormLabel>
+                                <FormLabel></FormLabel>
                                 <Input placeholder='John Doe' 
                                     value = {inputs.name}
                                     onChange={(e) => setInputs((prev) => ({...prev, name: e.target.value}))}
@@ -92,7 +102,7 @@ function EditModal({setUsers, user }) {
                             </FormControl>
 
                             <FormControl>
-                                <FormLabel>Role</FormLabel>
+                                <FormLabel>Rol</FormLabel>
                                 <Input placeholder='Software Engineer' 
                                 value = {inputs.role}
                                 onChange={(e) => setInputs((prev) => ({...prev, role: e.target.value}))}
@@ -100,7 +110,7 @@ function EditModal({setUsers, user }) {
                             </FormControl>
                         </Flex>
                         <FormControl mt={4}>
-                            <FormLabel>Description</FormLabel>
+                            <FormLabel>Descriere</FormLabel>
                             <Textarea
                                 resize={"none"}
                                 overflowY={"hidden"}
